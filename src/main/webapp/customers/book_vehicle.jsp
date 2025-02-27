@@ -94,7 +94,7 @@
             <select name="from_location" id="fromLocation" class="form-control" onchange="calculatePrice()">
                 <% if (serviceType.equalsIgnoreCase("rental")) { %>
                 <option value="Colombo">Colombo</option>
-                <option value="Kandy">Kandy</option>
+                <option value="Kandy">kandy</option>
                 <option value="Galle">Galle</option>
                 <option value="Anuradhapura">Anuradhapura</option>
                 <option value="Jaffna">Jaffna</option>
