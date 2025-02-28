@@ -11,7 +11,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
-
 @WebServlet("/customers/login")
 public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -25,7 +24,8 @@ public class LoginServlet extends HttpServlet {
         if (customer != null) {
             // If the customer exists, store customer details in session
             HttpSession session = request.getSession();
-            session.setAttribute("customerEmail", email); // Store only the email or customer info in session
+            session.setAttribute("customerId", customer.getId()); // Store customer ID
+            session.setAttribute("customerEmail", customer.getEmail()); // Store email
 
             // Redirect to home page (or dashboard)
             response.sendRedirect("index.jsp");

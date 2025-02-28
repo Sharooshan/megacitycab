@@ -35,6 +35,7 @@
                 </li>
                 <li class="nav-item">
                     <% String customerEmail = (String) session.getAttribute("customerEmail"); %>
+                    <% Integer customerId = (Integer) session.getAttribute("customerId"); %>
                     <% if (customerEmail != null) { %>
                     <a class="nav-link" href="logout">Logout</a>
                     <% } else { %>
@@ -47,13 +48,13 @@
 </nav>
 
 <div class="container">
-    <h1>Welcome to MegaCity Cab</h1>
-    <% if (customerEmail != null) { %>
-    <p>Hello, <%= customerEmail %>! You are logged in.</p>
-    <% } else { %>
-    <p>You are not logged in. Please log in to access more features.</p>
-    <% } %>
-
+    <h1>Welcome to the Customer Page</h1>
+    <p><% if (customerEmail != null && customerId != null) { %>
+        Hello, <%= customerEmail %>! Your Customer ID: <%= customerId %> <br>You are logged in.
+        <% } else { %>
+        You are not logged in. Please log in to access more features.
+        <% } %>
+    </p>
     <br/>
     <a href="customer_page.jsp?serviceType=uber" class="btn btn-primary">Uber (Colombo City)</a>
     <a href="customer_page.jsp?serviceType=rental" class="btn btn-success">Rental Service (Outside Colombo)</a>
@@ -95,7 +96,7 @@
         <p><strong>CC:</strong> <%= cc %></p>
         <p><strong>Number Plate:</strong> <%= numberPlate %></p>
         <% if (customerEmail != null) { %>
-        <a href="book_vehicle.jsp?vehicle_id=<%= vehicleId %>&serviceType=<%= serviceType %>" class="btn btn-warning">Take Now</a>
+        <a href="book_vehicle.jsp?vehicle_id=<%= vehicleId %>&serviceType=<%= serviceType %>&customer_id=<%= customerId %>" class="btn btn-warning">Take Now</a>
         <% } %>
     </div>
     <%
