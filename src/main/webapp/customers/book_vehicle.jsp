@@ -33,6 +33,10 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+                <% String customerEmail = (String) session.getAttribute("customerEmail"); %>
+                <% Integer customerId = (Integer) session.getAttribute("customerId"); %>
+
+                <% if (customerEmail != null) { %>
                 <li class="nav-item"><a class="nav-link" href="logout">Logout</a></li>
             </ul>
         </div>
@@ -45,6 +49,7 @@
     <%
         String vehicle_id = request.getParameter("vehicle_id");
         String serviceType = request.getParameter("serviceType");
+
         if (vehicle_id != null && !vehicle_id.isEmpty()) {
             Connection conn = null;
             PreparedStatement ps = null;
@@ -65,6 +70,7 @@
                     String numberPlate = rs.getString("number_plate");
                     String driverId = rs.getString("driver_id");
 
+
                     String driverName = "";
                     String driverMobile = "";
                     if (driverId != null) {
@@ -78,84 +84,101 @@
                     }
     %>
 
-    <div class="vehicle-card">
-        <h4><%= vehicleType %> - <%= model %></h4>
-        <img src="<%= request.getContextPath() %>/images/<%= image %>" alt="<%= vehicleType %>" class="vehicle-img">
-        <p><strong>Color:</strong> <%= color %></p>
-        <p><strong>CC:</strong> <%= cc %></p>
-        <p><strong>Number Plate:</strong> <%= numberPlate %></p>
-        <p><strong>Driver Name:</strong> <%= driverName %></p>
-        <p><strong>Driver Mobile:</strong> <%= driverMobile %></p>
+    <h4><%= vehicleType %> - <%= model %></h4>
+    <img src="<%= request.getContextPath() %>/images/<%= image %>" alt="<%= vehicleType %>" class="vehicle-img">
+    <p><strong>Color:</strong> <%= color %></p>
+    <p><strong>CC:</strong> <%= cc %></p>
+    <p><strong>Number Plate:</strong> <%= numberPlate %></p>
+    <p><strong>Driver Name:</strong> <%= driverName %></p>
+    <p><strong>Driver Mobile:</strong> <%= driverMobile %></p>
 
-        <form action="confirm_booking.jsp" method="post" id="bookingForm">
-            <input type="hidden" name="vehicle_id" value="<%= vehicle_id %>">
+    <form action="confirm_booking.jsp" method="post" id="bookingForm">
+        <input type="hidden" name="vehicle_id" value="<%= vehicle_id %>">
+        <input type="hidden" name="customer_id" value="<%= customerId %>"> <!-- Pass customer ID here -->
+        <!-- Add hidden input for total price -->
+        <input type="hidden" name="total_price" id="totalPriceHidden">
+        <label>Trip Date (start):</label>
+        <input type="date" id="trip_start_date" name="trip_start_date" required class="form-control">
 
-            <label>From Location:</label>
-            <select name="from_location" id="fromLocation" class="form-control" onchange="calculatePrice()">
-                <% if (serviceType.equalsIgnoreCase("rental")) { %>
-                <option value="Colombo">Colombo</option>
-                <option value="Kandy">Kandy</option>
-                <option value="Galle">Galle</option>
-                <option value="Anuradhapura">Anuradhapura</option>
-                <option value="Jaffna">Jaffna</option>
-                <% } else if (serviceType.equalsIgnoreCase("uber")) { %>
-                <option value="Pettah">Pettah</option>
-                <option value="Wellawatte">Wellawatte</option>
-                <option value="Bambalapitiya">Bambalapitiya</option>
-                <option value="Nugegoda">Nugegoda</option>
-                <option value="Dehiwala">Dehiwala</option>
-                <% } %>
-            </select>
+        <label>Trip Date (end):</label>
+        <input type="date" id="trip_end_date" name="trip_end_date" required class="form-control">
 
-            <label>To Location:</label>
-            <select name="to_location" id="toLocation" class="form-control" onchange="calculatePrice()">
-                <% if (serviceType.equalsIgnoreCase("rental")) { %>
-                <option value="Kandy">Kandy</option>
-                <option value="Galle">Galle</option>
-                <option value="Jaffna">Jaffna</option>
-                <option value="Anuradhapura">Anuradhapura</option>
-                <option value="Trincomalee">Trincomalee</option>
-                <% } else if (serviceType.equalsIgnoreCase("uber")) { %>
-                <option value="Pettah">Pettah</option>
-                <option value="Wellawatte">Wellawatte</option>
-                <option value="Bambalapitiya">Bambalapitiya</option>
-                <option value="Nugegoda">Nugegoda</option>
-                <option value="Dehiwala">Dehiwala</option>
-                <% } %>
-            </select>
+        <script>
+            document.getElementById("trip_start_date").addEventListener("change", function () {
+                let startDate = document.getElementById("trip_start_date").value;
+                document.getElementById("trip_end_date").min = startDate; // Set min date for end date
+            });
 
-            <label>Trip Date:</label>
-            <input type="date" name="trip_date" required class="form-control">
+            document.getElementById("trip_end_date").addEventListener("change", function () {
+                let startDate = new Date(document.getElementById("trip_start_date").value);
+                let endDate = new Date(document.getElementById("trip_end_date").value);
 
-            <label>Trip Time:</label>
-            <input type="time" name="trip_time" required class="form-control">
+                if (endDate < startDate) {
+                    alert("End date must be after the start date!");
+                    document.getElementById("trip_end_date").value = ""; // Clear invalid input
+                }
+            });
+        </script>
 
-            <label>Passenger Count:</label>
-            <input type="number" name="passenger_count" required class="form-control"
-                   min="1" max="<%= vehicleType.equalsIgnoreCase("Bike") ? 1 : vehicleType.equalsIgnoreCase("Auto") ? 3 : 4 %>">
+        <label>From Location:</label>
+        <select name="from_location" id="fromLocation" class="form-control" onchange="calculatePrice()">
+            <% if (serviceType.equalsIgnoreCase("rental")) { %>
+            <option value="Colombo">Colombo</option>
+            <option value="Kandy">Kandy</option>
+            <option value="Galle">Galle</option>
+            <option value="Anuradhapura">Anuradhapura</option>
+            <option value="Jaffna">Jaffna</option>
+            <% } else if (serviceType.equalsIgnoreCase("uber")) { %>
+            <option value="Pettah">Pettah</option>
+            <option value="Wellawatte">Wellawatte</option>
+            <option value="Bambalapitiya">Bambalapitiya</option>
+            <option value="Nugegoda">Nugegoda</option>
+            <option value="Dehiwala">Dehiwala</option>
+            <% } %>
+        </select>
 
-            <label>Payment Method:</label>
-            <select name="payment_method" class="form-control">
-                <% if (serviceType.equalsIgnoreCase("rental")) { %>
-                <option value="Online Payment">Online Payment</option>
-                <% } else if (serviceType.equalsIgnoreCase("uber")) { %>
-                <option value="Cash on Hand (LKR)">Cash on Hand (LKR)</option>
-                <% } %>
-            </select>
-            <div id="totalPriceDiv">
-                <p>Total Price: <span id="totalPrice">0</span> LKR</p>
-            </div>
+        <label>To Location:</label>
+        <select name="to_location" id="toLocation" class="form-control" onchange="calculatePrice()">
+            <% if (serviceType.equalsIgnoreCase("rental")) { %>
+            <option value="Kandy">Kandy</option>
+            <option value="Galle">Galle</option>
+            <option value="Jaffna">Jaffna</option>
+            <option value="Anuradhapura">Anuradhapura</option>
+            <option value="Trincomalee">Trincomalee</option>
+            <% } else if (serviceType.equalsIgnoreCase("uber")) { %>
+            <option value="Pettah">Pettah</option>
+            <option value="Wellawatte">Wellawatte</option>
+            <option value="Bambalapitiya">Bambalapitiya</option>
+            <option value="Nugegoda">Nugegoda</option>
+            <option value="Dehiwala">Dehiwala</option>
+            <% } %>
+        </select>
 
-            <!-- Discount Section -->
-            <div id="discountDiv" style="display:none; padding-top: 10px;">
-                <p><strong>Discount Applied: <span id="discountAmount">0.00</span> LKR</strong></p>
-            </div>
 
-            <button type="submit" class="btn btn-success">Confirm Booking</button>
-        </form>
-    </div>
+        <label>Trip Time:</label>
+        <input type="time" name="trip_time" required class="form-control">
 
-    <script>
+        <label>Passenger Count:</label>
+        <input type="number" name="passenger_count" required class="form-control"
+               min="1" max="<%= vehicleType.equalsIgnoreCase("Bike") ? 1 : vehicleType.equalsIgnoreCase("Auto") ? 3 : 4 %>">
+
+        <label>Payment Method:</label>
+        <select name="payment_method" class="form-control">
+            <option value="Online Payment">Online Payment</option>
+        </select>
+
+        <div id="totalPriceDiv">
+            <p>Total Price: <span id="totalPrice">0</span> LKR</p>
+        </div>
+
+        <!-- Discount Section -->
+        <div id="discountDiv" style="display:none; padding-top: 10px;">
+            <p><strong>Discount Applied: <span id="discountAmount">0.00</span> LKR</strong></p>
+        </div>
+
+        <button type="submit" class="btn btn-success">Confirm Booking</button>
+
+        <script>
         var priceList = {
             rental: {
                 "Colombo-Kandy": 5000,
@@ -167,6 +190,7 @@
             uber: {
                 "Pettah-Wellawatte": 1000,
                 "Pettah-Bambalapitiya": 800,
+
                 // Add more routes here...
             }
         };
@@ -179,43 +203,64 @@
 
             if (fromLocation && toLocation) {
                 var routeKey = fromLocation + "-" + toLocation;
-                var totalPrice = 0;
+                var basePrice = 0;
 
                 if (serviceType === "rental" && priceList.rental[routeKey]) {
-                    totalPrice = priceList.rental[routeKey];
+                    basePrice = priceList.rental[routeKey];
                 } else if (serviceType === "uber" && priceList.uber[routeKey]) {
-                    totalPrice = priceList.uber[routeKey];
+                    basePrice = priceList.uber[routeKey];
                 }
 
-                // Apply discount for rental if the booking is more than 1 day
-                var tripDate = document.getElementsByName("trip_date")[0].value;
-                var tripDateObj = new Date(tripDate);
-                var today = new Date();
-                var differenceInDays = Math.ceil((tripDateObj - today) / (1000 * 3600 * 24));
+                var totalPrice = basePrice;
+                var tripStartDate = document.getElementById("trip_start_date").value;
+                var tripEndDate = document.getElementById("trip_end_date").value;
 
-                if (serviceType === "rental" && differenceInDays > 1) {
-                    discountAmount = (totalPrice * 0.10); // 10% discount
-                    totalPrice -= discountAmount; // Subtract the discount
-                    document.getElementById("discountDiv").style.display = "block";
-                    document.getElementById("discountAmount").innerText = discountAmount.toFixed(2);
+                if (tripStartDate && tripEndDate) {
+                    var startDateObj = new Date(tripStartDate);
+                    var endDateObj = new Date(tripEndDate);
+                    var timeDiff = endDateObj - startDateObj;
+                    var dayDiff = timeDiff / (1000 * 3600 * 24) + 1; // Include the starting day
+
+                    totalPrice = basePrice * dayDiff; // Multiply by the number of days
+
+                    if (dayDiff > 1) {
+                        discountAmount = totalPrice * 0.1; // 10% discount for multi-day rentals
+                        totalPrice -= discountAmount;
+                    }
+                }
+
+                // Update the displayed total price
+                document.getElementById('totalPrice').innerText = totalPrice.toFixed(2);
+                document.getElementById('totalPriceHidden').value = totalPrice.toFixed(2); // Update the hidden field for total price
+                if (discountAmount > 0) {
+                    document.getElementById('discountDiv').style.display = 'block';
+                    document.getElementById('discountAmount').innerText = discountAmount.toFixed(2);
                 } else {
-                    document.getElementById("discountDiv").style.display = "none"; // Hide discount section if not eligible
+                    document.getElementById('discountDiv').style.display = 'none';
                 }
-
-                document.getElementById("totalPrice").innerText = totalPrice.toFixed(2);
             }
         }
 
-        window.onload = calculatePrice;
     </script>
 
-    <% } } catch (SQLException e) { e.printStackTrace(); } finally {
-        if (rs != null) try { rs.close(); } catch (SQLException se) {}
-        if (ps != null) try { ps.close(); } catch (SQLException se) {}
-        if (conn != null) try { conn.close(); } catch (SQLException se) {}
-    }} %>
-</div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <%
+                } else {
+                    out.println("<p>Vehicle not found.</p>");
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                // Clean up resources
+                try {
+                    if (rs != null) rs.close();
+                    if (ps != null) ps.close();
+                    if (conn != null) conn.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }}}
+    %>
+</div>
 </body>
 </html>

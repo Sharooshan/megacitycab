@@ -1,6 +1,5 @@
 package com.example.megacitycab.customers_page.model;
 
-
 public class Customer {
     private int id;
     private String name;
@@ -10,10 +9,21 @@ public class Customer {
     private String phone;
     private String nic;
 
-    // Default constructor
-    public Customer(int id, String name, String email, String password, String address, String phone, String nic) {}
+    // Default constructor (should not have parameters)
+    public Customer() {}
 
-    // Parameterized constructor
+    // Parameterized constructor with id
+    public Customer(int id, String name, String email, String password, String address, String phone, String nic) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.address = address;
+        this.phone = phone;
+        this.nic = nic;
+    }
+
+    // Parameterized constructor without id (for new customers)
     public Customer(String name, String email, String password, String address, String phone, String nic) {
         this.name = name;
         this.email = email;

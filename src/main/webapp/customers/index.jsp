@@ -56,6 +56,8 @@
                 </li>
                 <li class="nav-item">
                     <% String customerEmail = (String) session.getAttribute("customerEmail"); %>
+                    <% Integer customerId = (Integer) session.getAttribute("customerId"); %>
+
                     <% if (customerEmail != null) { %>
                     <a class="nav-link" href="logout">Logout</a>
                     <% } else { %>
@@ -69,9 +71,8 @@
 
 <div class="container">
     <h1>Welcome to the Customer Page</h1>
-    <p>
-        <% if (customerEmail != null) { %>
-        Hello, <%= customerEmail %>! You are logged in.
+    <p><% if (customerEmail != null && customerId != null) { %>
+        Hello, <%= customerEmail %>! Your Customer ID: <%= customerId %> <br>You are logged in.
         <% } else { %>
         You are not logged in. Please log in to access more features.
         <% } %>
@@ -118,7 +119,8 @@
             <p><strong>CC:</strong> <%= cc %></p>
             <p><strong>Number Plate:</strong> <%= numberPlate %></p>
             <% if (customerEmail != null) { %>
-            <a href="book_vehicle.jsp?vehicle_id=<%= vehicleId %>" class="btn btn-success">Take Now</a>
+            <a href="book_vehicle.jsp?vehicle_id=<%= vehicleId %>&customer_id=<%= customerId %>" class="btn btn-success">Take Now</a>
+
             <% } %>
         </div>
         <%
@@ -137,10 +139,14 @@
         %>
     </div>
 </div>
-
 <script>
     function showVehicles(service) {
-        window.location.href = "customer_page.jsp?serviceType=" + service;
+        var customerId = <%= customerId != null ? customerId : "null" %>;
+        if (customerId !== "null") {
+            window.location.href = "customer_page.jsp?serviceType=" + service + "&customerId=" + customerId;
+        } else {
+            alert("Please log in first.");
+        }
     }
 </script>
 
