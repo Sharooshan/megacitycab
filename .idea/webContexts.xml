@@ -4,6 +4,7 @@
     <option name="state">
       <map>
         <entry key="file://$PROJECT_DIR$/src/main/webapp/customers/book_vehicle.jsp" value="file://$PROJECT_DIR$/src/main/webapp/customers" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/customers/bookingStatus.jsp" value="file://$PROJECT_DIR$/src/main/webapp/customers" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/customers/confirm_booking.jsp" value="file://$PROJECT_DIR$/src/main/webapp/customers" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/driver/driver_dashboard.jsp" value="file://$PROJECT_DIR$/src/main/webapp/driver" />
       </map>

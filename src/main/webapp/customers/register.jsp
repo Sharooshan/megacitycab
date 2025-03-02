@@ -9,44 +9,43 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            background-color: #f8f9fa;
+            background: linear-gradient(135deg, #74ebd5, #acb6e5);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-        .container {
-            max-width: 600px;
-            background-color: #ffffff;
+        .login-container {
+            max-width: 400px;
+            background: #ffffff;
             padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
         }
         h2 {
-            font-family: 'Arial', sans-serif;
+            font-weight: 700;
             color: #333;
         }
-        .form-group label {
-            font-weight: bold;
-        }
         .form-control {
-            border-radius: 5px;
-            box-shadow: none;
+            border-radius: 8px;
             border: 1px solid #ced4da;
+            box-shadow: none;
         }
         .btn-primary {
-            background-color: #007bff;
-            border-color: #007bff;
+            background: #007bff;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            transition: 0.3s;
         }
         .btn-primary:hover {
-            background-color: #0056b3;
-            border-color: #0056b3;
-        }
-        .alert {
-            margin-top: 20px;
-        }
-        .text-center p {
-            font-size: 1rem;
+            background: #0056b3;
         }
         .text-center a {
             color: #007bff;
-            text-decoration: none;
+            font-weight: 600;
         }
         .text-center a:hover {
             text-decoration: underline;

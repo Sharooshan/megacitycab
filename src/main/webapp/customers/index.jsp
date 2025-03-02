@@ -8,33 +8,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Customer Page</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            background-color: #f8f9fa;
-        }
-        .container {
-            max-width: 900px;
-            margin-top: 50px;
-            background-color: #ffffff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        .navbar {
-            margin-bottom: 30px;
-        }
-        .vehicle-card {
-            margin-bottom: 20px;
-            border: 1px solid #ddd;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        .vehicle-img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 10px;
-        }
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <style>body {
+        background: linear-gradient(135deg, #74ebd5, #acb6e5);        font-family: 'Poppins', sans-serif;
+    }
+    .container {
+        max-width: 1000px;
+        margin-top: 50px;
+        background-color: #ffffff;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    }
+    .navbar {
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .vehicle-card {
+        transition: transform 0.3s ease-in-out;
+    }
+    .vehicle-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+    .vehicle-img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 10px;
+    }
+    .btn-group .btn {
+        padding: 12px 20px;
+        font-weight: 600;
+    }
     </style>
 </head>
 <body>
@@ -59,6 +64,8 @@
                     <% Integer customerId = (Integer) session.getAttribute("customerId"); %>
 
                     <% if (customerEmail != null) { %>
+                    <a class="nav-link" href="bookingStatus.jsp">Booking Status</a>
+
                     <a class="nav-link" href="logout">Logout</a>
                     <% } else { %>
                     <a class="nav-link" href="login.jsp">Login</a>

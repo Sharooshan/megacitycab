@@ -104,6 +104,16 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Check Ride Rejections</h5>
+                    <p class="card-text">View rejected rides and manage notifications.</p>
+                    <a href="viewRejections.jsp" class="btn btn-danger">Go</a>
+                </div>
+            </div>
+        </div>
+
 
         <div class="col-md-4">
             <div class="card text-center">
@@ -111,6 +121,17 @@
                     <h5 class="card-title">Manage Vehicles</h5>
                     <p class="card-text">View and manage vehicle listings.</p>
                     <a href="vehicleList.jsp" class="btn btn-primary">Go</a>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Add New Vehicle</h5>
+                    <p class="card-text">View and manage vehicle listings.</p>
+                    <a href="AddVehicle.jsp" class="btn btn-primary">Go</a>
                 </div>
             </div>
         </div>
