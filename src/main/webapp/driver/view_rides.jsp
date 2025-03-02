@@ -8,6 +8,8 @@
     <title>My Rides</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <body class="bg-light">
 
 <div class="container mt-5">
@@ -32,9 +34,30 @@
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/megacitycab", "root", "");
 
+// Handle ride status update
+                if ("POST".equalsIgnoreCase(request.getMethod())) {
+                    String rideIdParam = request.getParameter("rideId");
+                    String newStatus = request.getParameter("status");
+
+                    if (rideIdParam != null && newStatus != null) {
+                        int rideId = Integer.parseInt(rideIdParam);
+                        String updateSql = "UPDATE bookings SET status = ? WHERE id = ?";
+                        pstmt = conn.prepareStatement(updateSql);
+                        pstmt.setString(1, newStatus);
+                        pstmt.setInt(2, rideId);
+                        pstmt.executeUpdate();
+
+                        // Check if the status is "Rejected" and trigger an alert
+                        if ("Cancelled".equalsIgnoreCase(newStatus)) {
+                            response.sendRedirect("notify_admin.jsp?rideId=" + rideId);
+                        }
+
+                    }
+            }
+
                 // Query for ride history
                 String sqlRides = "SELECT b.id, b.from_location, b.to_location, b.trip_start_date, b.trip_end_date, b.trip_time, " +
-                        "b.passenger_count, b.payment_method, b.total_price, b.discount " +
+                        "b.passenger_count, b.payment_method, b.total_price, b.discount,  b.status " +
                         "FROM bookings b " +
                         "JOIN vehicle_driver_assignment vda ON b.vehicle_id = vda.vehicle_id " +
                         "WHERE vda.id = ?";
@@ -56,7 +79,9 @@
                 <th>Passenger Count</th>
                 <th>Payment Method</th>
                 <th>Total Price</th>
-                <th>Discount</th>
+<%--                <th>Discount</th>--%>
+                <th>Status</th>
+                <th>Update</th>
             </tr>
             </thead>
             <tbody>
@@ -75,7 +100,27 @@
                 <td><%= rsRides.getInt("passenger_count") %></td>
                 <td><%= rsRides.getString("payment_method") %></td>
                 <td><%= rsRides.getDouble("total_price") %></td>
-                <td><%= rsRides.getDouble("discount") %></td>
+<%--                <td><%= rsRides.getDouble("discount") %></td>--%>
+                <td>
+                    <% if ("Cancelled".equals(rsRides.getString("status"))) { %>
+                    <button class="btn btn-danger notify-admin" data-booking-id="<%= rsRides.getInt("id") %>">
+                        Cancelled
+                    </button>
+                    <% } else { %>
+                    <form method="post">
+                        <input type="hidden" name="rideId" value="<%= rsRides.getInt("id") %>">
+                        <select name="status" class="form-select">
+                            <option value="Pending" <%= rsRides.getString("status").equals("Pending") ? "selected" : "" %>>Pending</option>
+                            <option value="Completed" <%= rsRides.getString("status").equals("Completed") ? "selected" : "" %>>Completed</option>
+                            <option value="Cancelled" <%= rsRides.getString("status").equals("Cancelled") ? "selected" : "" %>>Cancelled</option>
+                        </select>
+                </td>
+                <td>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                    </form>
+                </td>
+                <% } %>
+
             </tr>
             <%
                 }
