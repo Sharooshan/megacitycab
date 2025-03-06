@@ -53,7 +53,7 @@
                         }
 
                     }
-            }
+                }
 
                 // Query for ride history
                 String sqlRides = "SELECT b.id, b.from_location, b.to_location, b.trip_start_date, b.trip_end_date, b.trip_time, " +
@@ -79,7 +79,7 @@
                 <th>Passenger Count</th>
                 <th>Payment Method</th>
                 <th>Total Price</th>
-<%--                <th>Discount</th>--%>
+                <%--                <th>Discount</th>--%>
                 <th>Status</th>
                 <th>Update</th>
             </tr>
@@ -100,7 +100,7 @@
                 <td><%= rsRides.getInt("passenger_count") %></td>
                 <td><%= rsRides.getString("payment_method") %></td>
                 <td><%= rsRides.getDouble("total_price") %></td>
-<%--                <td><%= rsRides.getDouble("discount") %></td>--%>
+                <%--                <td><%= rsRides.getDouble("discount") %></td>--%>
                 <td>
                     <% if ("Cancelled".equals(rsRides.getString("status"))) { %>
                     <button class="btn btn-danger notify-admin" data-booking-id="<%= rsRides.getInt("id") %>">

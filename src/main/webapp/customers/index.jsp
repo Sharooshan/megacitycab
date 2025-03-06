@@ -66,6 +66,8 @@
                     <% if (customerEmail != null) { %>
                     <a class="nav-link" href="bookingStatus.jsp">Booking Status</a>
 
+                    <a class="nav-link" href="Add_feedback.jsp"> Add Feedback</a>
+
                     <a class="nav-link" href="logout">Logout</a>
                     <% } else { %>
                     <a class="nav-link" href="login.jsp">Login</a>

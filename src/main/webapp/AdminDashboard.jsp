@@ -125,6 +125,18 @@
             </div>
         </div>
 
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Manage All Bookings</h5>
+                    <p class="card-text">View and manage all customer bookings.</p>
+                    <a href="manageBookings.jsp" class="btn btn-primary">Go</a>
+                </div>
+            </div>
+        </div>
+
+
+
 
         <div class="col-md-4">
             <div class="card text-center">
