@@ -135,6 +135,26 @@
             </div>
         </div>
 
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">driver_available_check</h5>
+                    <p class="card-text">View and manage vehicle listings.</p>
+                    <a href="driver_available_check.jsp" class="btn btn-primary">Go</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Manage Feedback</h5>
+                    <p class="card-text">View and manage vehicle listings.</p>
+                    <a href="manage_feedback.jsp" class="btn btn-primary">Go</a>
+                </div>
+            </div>
+        </div>
+
 
 
 

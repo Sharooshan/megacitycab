@@ -9,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            background: linear-gradient(135deg, #74ebd5, #acb6e5);
+            background: linear-gradient(135deg, #f8f9fa, #f8f9fa);
             height: 100vh;
             display: flex;
             justify-content: center;
@@ -50,6 +50,10 @@
         .text-center a:hover {
             text-decoration: underline;
         }
+        .error {
+            color: red;
+            font-size: 14px;
+        }
     </style>
 </head>
 <body>
@@ -63,30 +67,36 @@
     </div>
     <% } %>
 
-    <form action="register" method="post">
+    <form action="register" method="post" onsubmit="return validateForm()">
         <div class="form-group">
             <label for="name">Name:</label>
             <input type="text" class="form-control" id="name" name="name" required>
+            <span id="nameError" class="error"></span>
         </div>
         <div class="form-group">
             <label for="email">Email:</label>
             <input type="email" class="form-control" id="email" name="email" required>
+            <span id="emailError" class="error"></span>
         </div>
         <div class="form-group">
             <label for="password">Password:</label>
             <input type="password" class="form-control" id="password" name="password" required>
+            <span id="passwordError" class="error"></span>
         </div>
         <div class="form-group">
             <label for="address">Address:</label>
             <textarea class="form-control" id="address" name="address" required></textarea>
+            <span id="addressError" class="error"></span>
         </div>
         <div class="form-group">
             <label for="phone">Phone:</label>
             <input type="text" class="form-control" id="phone" name="phone" required>
+            <span id="phoneError" class="error"></span>
         </div>
         <div class="form-group">
             <label for="nic">NIC:</label>
             <input type="text" class="form-control" id="nic" name="nic" required>
+            <span id="nicError" class="error"></span>
         </div>
         <button type="submit" class="btn btn-primary btn-block">Register</button>
     </form>
@@ -99,5 +109,74 @@
 <!-- Bootstrap 5 JS and Popper.js -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
+<!-- JavaScript Form Validation -->
+<script>
+    function validateForm() {
+        let isValid = true;
+
+        // Name Validation
+        let name = document.getElementById("name").value;
+        let namePattern = /^[A-Za-z\s]{3,}$/;
+        if (!namePattern.test(name)) {
+            document.getElementById("nameError").innerText = "Name must be at least 3 characters and contain only letters.";
+            isValid = false;
+        } else {
+            document.getElementById("nameError").innerText = "";
+        }
+
+        // Email Validation
+        let email = document.getElementById("email").value;
+        let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if (!emailPattern.test(email)) {
+            document.getElementById("emailError").innerText = "Invalid email format.";
+            isValid = false;
+        } else {
+            document.getElementById("emailError").innerText = "";
+        }
+
+        // Password Validation
+        let password = document.getElementById("password").value;
+        let passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+        if (!passwordPattern.test(password)) {
+            document.getElementById("passwordError").innerText = "Password must be at least 8 characters with one uppercase, one lowercase, one number, and one special character.";
+            isValid = false;
+        } else {
+            document.getElementById("passwordError").innerText = "";
+        }
+
+        // Address Validation
+        let address = document.getElementById("address").value;
+        if (address.trim() === "") {
+            document.getElementById("addressError").innerText = "Address cannot be empty.";
+            isValid = false;
+        } else {
+            document.getElementById("addressError").innerText = "";
+        }
+
+        // Phone Validation (Sri Lankan format)
+        let phone = document.getElementById("phone").value;
+        let phonePattern = /^(07[01245678])\d{7}$/;
+        if (!phonePattern.test(phone)) {
+            document.getElementById("phoneError").innerText = "Enter a valid Sri Lankan phone number (07XXXXXXXX).";
+            isValid = false;
+        } else {
+            document.getElementById("phoneError").innerText = "";
+        }
+
+        // NIC Validation (Old: 9 digits + V/X, New: 12 digits)
+        let nic = document.getElementById("nic").value;
+        let nicPattern = /^([0-9]{9}[VX]|[0-9]{12})$/;
+        if (!nicPattern.test(nic)) {
+            document.getElementById("nicError").innerText = "Enter a valid NIC (Old: 9 digits + V/X, New: 12 digits).";
+            isValid = false;
+        } else {
+            document.getElementById("nicError").innerText = "";
+        }
+
+        return isValid;
+    }
+</script>
+
 </body>
 </html>

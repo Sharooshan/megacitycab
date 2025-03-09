@@ -120,6 +120,8 @@
             </select>
             <button type="submit" class="btn btn-primary mt-3">Assign Vehicle</button>
         </form>
+        <!-- Button to Check Driver Availability -->
+        <a href="driver_available_check.jsp?vehicle_id=<%= vehicleId %>" class="btn btn-info mt-3">Check Driver Availability</a>
     </div>
 
     <%
@@ -186,7 +188,10 @@
                 %>
             </select>
             <button type="submit" class="btn btn-primary mt-3">Assign Vehicle</button>
+
         </form>
+        <!-- Button to Check Driver Availability -->
+        <a href="driver_available_check.jsp?vehicle_id=<%= vehicleId %>" class="btn btn-info mt-3">Check Driver Availability</a>
     </div>
 
     <%

@@ -100,6 +100,10 @@
         <label>Trip Date (start):</label>
         <input type="date" id="trip_start_date" name="trip_start_date" required class="form-control">
 
+        <script>
+            document.getElementById("trip_start_date").setAttribute("min", new Date().toISOString().split('T')[0]);
+        </script>
+
         <label>Trip Date (end):</label>
         <input type="date" id="trip_end_date" name="trip_end_date" required class="form-control">
 
@@ -119,7 +123,6 @@
                 }
             });
         </script>
-
         <label>From Location:</label>
         <select name="from_location" id="fromLocation" class="form-control" onchange="calculatePrice()">
             <% if (serviceType.equalsIgnoreCase("rental")) { %>
@@ -128,12 +131,23 @@
             <option value="Galle">Galle</option>
             <option value="Anuradhapura">Anuradhapura</option>
             <option value="Jaffna">Jaffna</option>
+            <option value="Nuwara Eliya">Nuwara Eliya</option>
+            <option value="Batticaloa">Batticaloa</option>
+            <option value="Trincomalee">Trincomalee</option>
+            <option value="Matara">Matara</option>
+            <option value="Badulla">Badulla</option>
+            <option value="Kurunegala">Kurunegala</option>
             <% } else if (serviceType.equalsIgnoreCase("uber")) { %>
             <option value="Pettah">Pettah</option>
             <option value="Wellawatte">Wellawatte</option>
             <option value="Bambalapitiya">Bambalapitiya</option>
             <option value="Nugegoda">Nugegoda</option>
             <option value="Dehiwala">Dehiwala</option>
+            <option value="Mount Lavinia">Mount Lavinia</option>
+            <option value="Maharagama">Maharagama</option>
+            <option value="Kottawa">Kottawa</option>
+            <option value="Malabe">Malabe</option>
+            <option value="Ratmalana">Ratmalana</option>
             <% } %>
         </select>
 
@@ -145,18 +159,36 @@
             <option value="Jaffna">Jaffna</option>
             <option value="Anuradhapura">Anuradhapura</option>
             <option value="Trincomalee">Trincomalee</option>
+            <option value="Nuwara Eliya">Nuwara Eliya</option>
+            <option value="Batticaloa">Batticaloa</option>
+            <option value="Matara">Matara</option>
+            <option value="Badulla">Badulla</option>
+            <option value="Kurunegala">Kurunegala</option>
             <% } else if (serviceType.equalsIgnoreCase("uber")) { %>
             <option value="Pettah">Pettah</option>
             <option value="Wellawatte">Wellawatte</option>
             <option value="Bambalapitiya">Bambalapitiya</option>
             <option value="Nugegoda">Nugegoda</option>
             <option value="Dehiwala">Dehiwala</option>
+            <option value="Mount Lavinia">Mount Lavinia</option>
+            <option value="Maharagama">Maharagama</option>
+            <option value="Kottawa">Kottawa</option>
+            <option value="Malabe">Malabe</option>
+            <option value="Ratmalana">Ratmalana</option>
             <% } %>
         </select>
 
 
+
         <label>Trip Time:</label>
-        <input type="time" name="trip_time" required class="form-control">
+        <input type="time" id="trip_time" name="trip_time" required class="form-control">
+
+        <script>
+            const timeInput = document.getElementById("trip_time");
+            timeInput.setAttribute("min", "06:00");
+            timeInput.setAttribute("max", "19:00");
+        </script>
+
 
         <label>Passenger Count:</label>
         <input type="number" name="passenger_count" required class="form-control"
@@ -179,23 +211,46 @@
         <button type="submit" class="btn btn-success">Confirm Booking</button>
 
         <script>
-        var priceList = {
-            rental: {
-                "Colombo-Kandy": 5000,
-                "Colombo-Galle": 4000,
-                "Colombo-Anuradhapura": 7000,
-                "Colombo-Jaffna": 8000,
-                // Add more routes here...
-            },
-            uber: {
-                "Pettah-Wellawatte": 1000,
-                "Pettah-Bambalapitiya": 800,
+            var priceList = {
+                rental: {
+                    "Colombo-Kandy": 5000,
+                    "Colombo-Galle": 4000,
+                    "Colombo-Anuradhapura": 7000,
+                    "Colombo-Jaffna": 8000,
+                    "Colombo-Nuwara Eliya": 5500,
+                    "Colombo-Batticaloa": 7500,
+                    "Colombo-Trincomalee": 7200,
+                    "Colombo-Matara": 4500,
+                    "Colombo-Badulla": 6000,
+                    "Colombo-Kurunegala": 3500,
+                    "Kandy-Galle": 2000,
+                    "Kandy-Anuradhapura": 4500,
+                    "Kandy-Jaffna": 6000,
+                    "Galle-Kandy": 2000,
+                    "Galle-Trincomalee": 3500,
+                    "Badulla-Kandy": 3500,
+                    // Add all other combinations...
+                },
+                uber: {
+                    "Pettah-Wellawatte": 1000,
+                    "Pettah-Bambalapitiya": 800,
+                    "Colombo-Fort": 700,
+                    "Colombo-Malabe": 1500,
+                    "Colombo-Nugegoda": 1200,
+                    "Colombo-Ratmalana": 1600,
+                    "Colombo-Dehiwala": 1100,
+                    "Colombo-Mount Lavinia": 1300,
+                    "Colombo-Maharagama": 1400,
+                    "Colombo-Kottawa": 1700,
+                    "Wellawatte-Bambalapitiya": 700,
+                    "Nugegoda-Maharagama": 900,
+                    "Malabe-Kottawa": 1200,
+                    // Add all other combinations...
+                }
+            };
 
-                // Add more routes here...
-            }
-        };
 
-        function calculatePrice() {
+            function calculatePrice() {
             var fromLocation = document.getElementById('fromLocation').value;
             var toLocation = document.getElementById('toLocation').value;
             var serviceType = "<%= serviceType %>";

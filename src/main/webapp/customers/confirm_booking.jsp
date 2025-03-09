@@ -113,7 +113,7 @@
         </div>
     </div>
     <div class="text-center mt-4">
-        <a href="index.jsp" class="btn btn-custom">Go to Home</a>
+<%--        <a href="index.jsp" class="btn btn-custom">Go to Home</a>--%>
         <a href="bookingHistory.jsp" class="btn btn-outline-primary ms-2">View Booking History</a>
     </div>
 </div>

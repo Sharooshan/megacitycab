@@ -11,7 +11,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
     <style>body {
-        background: linear-gradient(135deg, #74ebd5, #acb6e5);        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #f8f9fa, #f8f9fa);        font-family: 'Poppins', sans-serif;
     }
     .container {
         max-width: 1000px;
@@ -67,6 +67,8 @@
                     <a class="nav-link" href="bookingStatus.jsp">Booking Status</a>
 
                     <a class="nav-link" href="Add_feedback.jsp"> Add Feedback</a>
+
+
 
                     <a class="nav-link" href="logout">Logout</a>
                     <% } else { %>
@@ -128,7 +130,7 @@
             <p><strong>CC:</strong> <%= cc %></p>
             <p><strong>Number Plate:</strong> <%= numberPlate %></p>
             <% if (customerEmail != null) { %>
-            <a href="book_vehicle.jsp?vehicle_id=<%= vehicleId %>&customer_id=<%= customerId %>" class="btn btn-success">Take Now</a>
+<%--            <a href="book_vehicle.jsp?vehicle_id=<%= vehicleId %>&customer_id=<%= customerId %>" class="btn btn-success">Take Now</a>--%>
 
             <% } %>
         </div>

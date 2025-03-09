@@ -1,6 +1,7 @@
 <%@ page import="java.sql.*" %>
 <%@ page import="javax.sql.DataSource" %>
-<%@ page import="java.text.SimpleDateFormat" %><!DOCTYPE html>
+<%@ page import="java.text.SimpleDateFormat" %>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -17,6 +18,22 @@
 <body>
 <div class="container table-container">
     <h2 class="text-center mb-4">Manage Bookings</h2>
+
+    <!-- Filter form -->
+    <form method="get" action="manage_bookings.jsp">
+        <div class="mb-3">
+            <label for="booking_id" class="form-label">Booking ID:</label>
+            <input type="text" class="form-control" id="booking_id" name="booking_id" placeholder="Enter Booking ID" value="<%= request.getParameter("booking_id") %>">
+        </div>
+        <div class="mb-3">
+            <label for="customer_id" class="form-label">Customer ID:</label>
+            <input type="text" class="form-control" id="customer_id" name="customer_id" placeholder="Enter Customer ID" value="<%= request.getParameter("customer_id") %>">
+        </div>
+<%--        <button type="submit" class="btn btn-primary">Filter</button>--%>
+    </form>
+
+    <br/>
+
     <form method="post" action="manage_bookings_action.jsp">
         <table class="table table-striped table-bordered">
             <thead class="table-dark">
@@ -47,9 +64,14 @@
                 Connection con = null;
                 Statement stmt = null;
                 ResultSet rs = null;
+                String bookingIdFilter = request.getParameter("booking_id"); // Get the booking ID filter
+                String customerIdFilter = request.getParameter("customer_id"); // Get the customer ID filter
+
                 try {
                     Class.forName("com.mysql.jdbc.Driver");
                     con = DriverManager.getConnection("jdbc:mysql://localhost:3306/megacitycab", "root", "");
+
+                    // Modify the query to filter by booking_id and customer_id if provided
                     String query = "SELECT b.id, c.name AS customer_name, c.nic, c.phone, " +
                             "b.vehicle_id, b.trip_start_date, b.trip_end_date, " +
                             "b.from_location, b.to_location, b.trip_time, " +
@@ -61,8 +83,31 @@
                             "JOIN customers c ON b.customer_id = c.id " +
                             "LEFT JOIN vehicle_driver_assignment vda ON b.vehicle_id = vda.vehicle_id " +
                             "LEFT JOIN drivers d ON vda.id = d.id";
-                    stmt = con.createStatement();
-                    rs = stmt.executeQuery(query);
+
+                    // Apply the filters based on booking_id and customer_id if they exist
+                    if (bookingIdFilter != null && !bookingIdFilter.isEmpty()) {
+                        query += " WHERE b.id = ?";
+                    }
+                    if (customerIdFilter != null && !customerIdFilter.isEmpty()) {
+                        if (bookingIdFilter != null && !bookingIdFilter.isEmpty()) {
+                            query += " AND c.id = ?";
+                        } else {
+                            query += " WHERE c.id = ?";
+                        }
+                    }
+
+                    PreparedStatement preparedStatement = con.prepareStatement(query);
+
+                    // Set the parameters for the prepared statement
+                    int parameterIndex = 1;
+                    if (bookingIdFilter != null && !bookingIdFilter.isEmpty()) {
+                        preparedStatement.setString(parameterIndex++, bookingIdFilter);
+                    }
+                    if (customerIdFilter != null && !customerIdFilter.isEmpty()) {
+                        preparedStatement.setString(parameterIndex++, customerIdFilter);
+                    }
+
+                    rs = preparedStatement.executeQuery();
                     while (rs.next()) {
             %>
             <tr>

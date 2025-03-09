@@ -86,7 +86,7 @@
   <form action="AddVehicleServlet" method="post" enctype="multipart/form-data">
     <div class="mb-3">
       <label for="vehicleType" class="form-label">Vehicle Type:</label>
-      <select name="vehicleType" id="vehicleType" class="form-control" required>
+      <select name="vehicleType" id="vehicleType" class="form-control" required onchange="changeModelOptions()">
         <option value="Car">Car</option>
         <option value="Bike">Bike</option>
         <option value="Auto">Auto</option>
@@ -95,22 +95,33 @@
 
     <div class="mb-3">
       <label for="model" class="form-label">Model:</label>
-      <input type="text" name="model" id="model" class="form-control" required>
+      <select name="model" id="model" class="form-control" required>
+        <!-- Default Options -->
+        <option value="" disabled selected>Select Model</option>
+      </select>
     </div>
 
     <div class="mb-3">
       <label for="color" class="form-label">Color:</label>
-      <input type="text" name="color" id="color" class="form-control" required>
+      <select name="color" id="color" class="form-control" required>
+        <option value="Red">Red</option>
+        <option value="Green">Green</option>
+        <option value="Black">Black</option>
+        <option value="Yellow">Yellow</option>
+        <option value="Blue">Blue</option>
+        <option value="White">White</option> <!-- Extra color option -->
+      </select>
     </div>
 
     <div class="mb-3">
       <label for="cc" class="form-label">CC:</label>
-      <input type="text" name="cc" id="cc" class="form-control" required>
+      <input type="number" name="cc" id="cc" class="form-control" min="100" max="500" required>
     </div>
 
     <div class="mb-3">
       <label for="numberPlate" class="form-label">Number Plate:</label>
-      <input type="text" name="numberPlate" id="numberPlate" class="form-control" required>
+      <input type="text" name="numberPlate" id="numberPlate" class="form-control" pattern="^[A-Z]{2}[0-9]{4}[A-Z]{1}$" title="Example: AB1234C" required>
+      <small class="form-text text-muted">Example: AB1234C</small>
     </div>
 
     <div class="mb-3">
@@ -125,6 +136,36 @@
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
+<script>
+  // JavaScript to handle dynamic model options based on vehicle type
+  function changeModelOptions() {
+    const vehicleType = document.getElementById("vehicleType").value;
+    const modelSelect = document.getElementById("model");
+
+    // Clear current options
+    modelSelect.innerHTML = "<option value='' disabled selected>Select Model</option>";
+
+    let models = [];
+
+    // Set models based on vehicle type
+    if (vehicleType === "Car") {
+      models = ["Toyota Corolla", "Honda Civic", "BMW 3 Series", "Audi A4"];
+    } else if (vehicleType === "Bike") {
+      models = ["Yamaha R15", "Honda CBR500R", "KTM Duke 390"];
+    } else if (vehicleType === "Auto") {
+      models = ["Tata Nano", "Maruti Suzuki Alto", "Honda Activa"];
+    }
+
+    // Populate the model options
+    models.forEach(model => {
+      const option = document.createElement("option");
+      option.value = model;
+      option.text = model;
+      modelSelect.appendChild(option);
+    });
+  }
+</script>
 
 </body>
 </html>
