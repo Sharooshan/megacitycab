@@ -14,12 +14,12 @@
         background: linear-gradient(135deg, #f8f9fa, #f8f9fa);        font-family: 'Poppins', sans-serif;
     }
     .container {
-        max-width: 1000px;
+        max-width: 1900px;
         margin-top: 50px;
         background-color: #ffffff;
         padding: 40px;
         border-radius: 12px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 5px 15px rgb(255, 255, 255);
     }
     .navbar {
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -150,6 +150,33 @@
         %>
     </div>
 </div>
+
+<div class="container mt-5">
+    <h2>About Our Shop</h2>
+    <div class="row align-items-center">
+        <div class="col-md-6">
+            <img src="<%= request.getContextPath() %>/images/shop.jpg" class="img-fluid rounded" alt="Our Shop">
+        </div>
+        <div class="col-md-6">
+            <p class="lead">
+                Welcome to Mega City Cab, your trusted transportation service in Colombo and beyond. We offer reliable
+                and comfortable rides, whether you're traveling within the city or need a long-distance rental.
+            </p>
+            <p>
+                Our fleet includes a variety of vehicles, from compact cars to spacious SUVs, ensuring you travel in
+                style and comfort. We prioritize customer satisfaction with well-maintained vehicles and professional drivers.
+            </p>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><i class="fas fa-car"></i> Wide range of vehicle options</li>
+                <li class="list-group-item"><i class="fas fa-shield-alt"></i> Safe and secure rides</li>
+                <li class="list-group-item"><i class="fas fa-thumbs-up"></i> Affordable pricing</li>
+                <li class="list-group-item"><i class="fas fa-clock"></i> 24/7 availability</li>
+            </ul>
+            <a href="contact.jsp" class="btn btn-primary mt-3">Contact Us</a>
+        </div>
+    </div>
+</div>
+
 <script>
     function showVehicles(service) {
         var customerId = <%= customerId != null ? customerId : "null" %>;
