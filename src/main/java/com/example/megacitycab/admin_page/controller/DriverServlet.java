@@ -59,7 +59,7 @@ public class DriverServlet extends HttpServlet {
                     address, age, experience));
 
             if (success) {
-                response.sendRedirect("success.html");
+                response.sendRedirect("success.jsp");
             } else {
                 response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                 response.getWriter().write("Error saving driver details. Please try again later.");

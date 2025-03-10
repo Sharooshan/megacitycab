@@ -120,8 +120,10 @@
 
     <div class="mb-3">
       <label for="numberPlate" class="form-label">Number Plate:</label>
-      <input type="text" name="numberPlate" id="numberPlate" class="form-control" pattern="^[A-Z]{2}[0-9]{4}[A-Z]{1}$" title="Example: AB1234C" required>
-      <small class="form-text text-muted">Example: AB1234C</small>
+      <input type="text" name="numberPlate" id="numberPlate" class="form-control"
+             pattern="^WP\s[a-zA-Z]{3}[0-9]{4}$"
+             title="Example: WP ABC1234" required>
+      <small class="form-text text-muted">Example: WP ABC1234</small>
     </div>
 
     <div class="mb-3">
