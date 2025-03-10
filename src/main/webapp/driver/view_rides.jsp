@@ -8,6 +8,42 @@
     <title>My Rides</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
+<style>
+    body {
+        background-color: #121212; /* Dark Background */
+        color: #ffffff;
+    }
+    .card {
+        background-color: #1e1e1e; /* Dark Card */
+        color: #ffffff;
+        border: 1px solid #333;
+    }
+    .list-group-item {
+        background-color: #1e1e1e;
+        color: #ffffff;
+        border-color: #444;
+    }
+    .list-group-item-action:hover {
+        background-color: #333;
+    }
+    .table {
+        background-color: #1e1e1e;
+        color: #ffffff;
+    }
+    .table th, .table td {
+        border-color: #444;
+    }
+    .table-dark {
+        background-color: #000000;
+    }
+    .btn-dark {
+        background-color: #333;
+        border-color: #444;
+    }
+    .btn-dark:hover {
+        background-color: #555;
+    }
+</style>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <body class="bg-light">

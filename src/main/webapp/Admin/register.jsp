@@ -81,6 +81,93 @@
         }
     </script>
 </head>
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+    .container {
+        max-width: 1200px;
+        margin-top: 50px;
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .vehicle-card {
+        margin-bottom: 20px;
+        border: 1px solid #ddd;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .vehicle-img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 10px;
+    }
+    body {
+        background-color: #ffffff;
+        color: #000000;
+        font-family: Arial, sans-serif;
+    }
+    .sidebar {
+        width: 250px;
+        height: 100vh;
+        position: fixed;
+        left: 0;
+        top: 0;
+        background-color: #000000;
+        color: #ffffff;
+        padding-top: 20px;
+    }
+    .sidebar a {
+        display: block;
+        color: #ffffff;
+        padding: 15px;
+        text-decoration: none;
+        transition: 0.3s;
+    }
+    .sidebar a:hover {
+        background-color: #555;
+    }
+    .content {
+        margin-left: 260px;
+        padding: 20px;
+    }
+    .card {
+        border: none;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .btn-dark {
+        background-color: #212529; /* Dark color */
+        border-color: #212529;
+        color: #fff;
+        transition: background-color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .btn-dark:hover {
+        background-color: #343a40; /* Slightly lighter dark shade */
+        border-color: #343a40;
+    }
+
+</style>
+
+<!-- Sidebar Navigation -->
+<div class="sidebar">
+    <h4 class="text-center">MegaCityCab - Admin</h4>
+    <a href="AdminDashboard.jsp">Dashboard</a>
+    <a href="assigning.jsp" >Assigning Drivers</a>
+    <a href="register.jsp" >Register Drivers</a>
+    <a href="admin_register.jsp">Register Admins</a>
+    <a href="viewRejections.jsp">Check Ride Rejections</a>
+    <a href="vehicleList.jsp">Manage Vehicles</a>
+    <a href="manageBookings.jsp">Manage Bookings</a>
+    <a href="driver_available_check.jsp">Driver Availability</a>
+    <a href="manage_feedback.jsp">Manage Feedback</a>
+    <a href="AddVehicle.jsp">Manage Vehicles</a>
+
+    <a href="AdminLogoutServlet">Logout</a>
+</div>
 <body class="bg-light">
 
 <div class="container mt-5">
@@ -163,7 +250,7 @@
 
             <!-- Submit Button -->
             <div class="text-center">
-                <input type="submit" value="Register" class="btn btn-primary">
+                <input type="submit" value="Register" class="btn btn-dark">
             </div>
         </form>
     </div>

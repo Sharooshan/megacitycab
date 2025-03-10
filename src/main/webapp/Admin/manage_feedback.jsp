@@ -10,27 +10,122 @@
     <title>Manage Feedback</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <style>
-        .feedback-card {
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 20px;
-            background-color: #f9f9f9;
-        }
-        .rating {
-            color: gold;
-        }
-        .feedback-actions {
-            margin-top: 10px;
-        }
-        .reply-input {
-            width: 100%;
-            margin-top: 10px;
-            padding: 10px;
-            font-size: 1em;
-        }
+
     </style>
+
 </head>
+<style>
+    .feedback-container {
+        float: right; /* Moves the container to the right */
+        width: 50%; /* Adjust width as needed */
+        margin-left: auto;
+        margin-right: 20px; /* Adds some spacing from the right edge */
+    }
+
+    @media (max-width: 768px) {
+        .feedback-container {
+            width: 100%; /* Full width on smaller screens */
+            float: none;
+            margin: 0 auto;
+        }
+    }
+
+
+    .feedback-card {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 20px;
+        background-color: #f9f9f9;
+    }
+    .rating {
+        color: gold;
+    }
+    .feedback-actions {
+        margin-top: 10px;
+    }
+    .reply-input {
+        width: 100%;
+        margin-top: 10px;
+        padding: 10px;
+        font-size: 1em;
+    }
+    body {
+        background-color: #f8f9fa;
+    }
+    .container {
+        max-width: 1200px;
+        margin-top: 50px;
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .vehicle-card {
+        margin-bottom: 20px;
+        border: 1px solid #ddd;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .vehicle-img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 10px;
+    }
+    body {
+        background-color: #ffffff;
+        color: #000000;
+        font-family: Arial, sans-serif;
+    }
+    .sidebar {
+        width: 250px;
+        height: 100vh;
+        position: fixed;
+        left: 0;
+        top: 0;
+        background-color: #000000;
+        color: #ffffff;
+        padding-top: 20px;
+    }
+    .sidebar a {
+        display: block;
+        color: #ffffff;
+        padding: 15px;
+        text-decoration: none;
+        transition: 0.3s;
+    }
+    .sidebar a:hover {
+        background-color: #555;
+    }
+    .content {
+        margin-left: 260px;
+        padding: 20px;
+    }
+    .card {
+        border: none;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+</style>
+<!-- Sidebar Navigation -->
+<div class="sidebar">
+    <h4 class="text-center">MegaCityCab - Admin</h4>
+    <a href="AdminDashboard.jsp">Dashboard</a>
+    <a href="assigning.jsp" >Assigning Drivers</a>
+    <a href="register.jsp" >Register Drivers</a>
+    <a href="admin_register.jsp">Register Admins</a>
+    <a href="viewRejections.jsp">Check Ride Rejections</a>
+    <a href="vehicleList.jsp">Manage Vehicles</a>
+    <a href="manageBookings.jsp">Manage Bookings</a>
+    <a href="driver_available_check.jsp">Driver Availability</a>
+    <a href="manage_feedback.jsp">Manage Feedback</a>
+    <a href="AddVehicle.jsp">Manage Vehicles</a>
+
+    <a href="AdminLogoutServlet">Logout</a>
+</div>
+
+
+
 <body>
 <h1>Manage Customer Feedback</h1>
 
@@ -122,7 +217,7 @@
             </form>
             <br>
             <!-- Delete Section -->
-            <a href="manage_feedback.jsp?delete_id=<%= rs.getInt("feedback_id") %>" class="btn btn-danger">Delete</a>
+<%--            <a href="manage_feedback.jsp?delete_id=<%= rs.getInt(" class="btn btn-danger">Delete</a>--%>
         </div>
     </div>
     <%

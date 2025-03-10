@@ -8,13 +8,97 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Manage Bookings</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            background-color: #f8f9fa;
-            padding: 20px;
-        }
-    </style>
+
 </head>
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+    .container {
+        max-width: 1200px;
+        margin-top: 50px;
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .vehicle-card {
+        margin-bottom: 20px;
+        border: 1px solid #ddd;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .vehicle-img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 10px;
+    }
+    body {
+        background-color: #ffffff;
+        color: #000000;
+        font-family: Arial, sans-serif;
+    }
+    .sidebar {
+        width: 250px;
+        height: 100vh;
+        position: fixed;
+        left: 0;
+        top: 0;
+        background-color: #000000;
+        color: #ffffff;
+        padding-top: 20px;
+    }
+    .sidebar a {
+        display: block;
+        color: #ffffff;
+        padding: 15px;
+        text-decoration: none;
+        transition: 0.3s;
+    }
+    .sidebar a:hover {
+        background-color: #555;
+    }
+    .content {
+        margin-left: 260px;
+        padding: 20px;
+    }
+    .card {
+        border: none;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .btn-dark {
+        background-color: #212529; /* Dark color */
+        border-color: #212529;
+        color: #fff;
+        transition: background-color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .btn-dark:hover {
+        background-color: #343a40; /* Slightly lighter dark shade */
+        border-color: #343a40;
+    }
+
+</style>
+<!-- Sidebar Navigation -->
+<div class="sidebar">
+    <h4 class="text-center">MegaCityCab - Admin</h4>
+    <a href="AdminDashboard.jsp">Dashboard</a>
+    <a href="assigning.jsp" >Assigning Drivers</a>
+    <a href="register.jsp" >Register Drivers</a>
+    <a href="admin_register.jsp">Register Admins</a>
+    <a href="viewRejections.jsp">Check Ride Rejections</a>
+    <a href="vehicleList.jsp">Manage Vehicles</a>
+    <a href="manageBookings.jsp">Manage Bookings</a>
+    <a href="driver_available_check.jsp">Driver Availability</a>
+    <a href="manage_feedback.jsp">Manage Feedback</a>
+    <a href="AddVehicle.jsp">Manage Vehicles</a>
+
+    <a href="AdminLogoutServlet">Logout</a>
+</div>
+
+
+
 <body>
 <div class="container table-container">
     <h2 class="text-center mb-4">Manage Bookings</h2>
@@ -56,7 +140,7 @@
                 <th>Driver Phone</th>
                 <th>Driver Email</th>
                 <th>Driver Address</th>
-                <th>Status</th>
+<%--                <th>Status</th>--%>
             </tr>
             </thead>
             <tbody>
@@ -115,7 +199,7 @@
                 <td><%= rs.getInt("id") %></td>
                 <td><%= rs.getString("customer_name") %></td>
                 <td><%= rs.getString("nic") %></td>
-                <td><a href="tel:<%= rs.getString("phone") %>" class="btn btn-primary">Call <%= rs.getString("phone") %></a></td>
+                <td><a href="tel:<%= rs.getString("phone") %>" class="btn btn-dark">Call <%= rs.getString("phone") %></a></td>
                 <td><%= rs.getInt("vehicle_id") %></td>
                 <td><%= rs.getDate("trip_start_date") %></td>
                 <td><%= rs.getDate("trip_end_date") %></td>
@@ -129,16 +213,16 @@
                 <td><a href="tel:<%= rs.getString("driver_phone") %>" class="btn btn-success">Call</a></td>
                 <td><a href="mailto:<%= rs.getString("driver_email") %>" class="btn btn-info">Email</a></td>
                 <td><%= rs.getString("driver_address") %></td>
-                <td>
-                    <select name="status_<%= rs.getInt("id") %>" class="form-select">
-                        <option value="Pending" <%= rs.getString("status").equals("Pending") ? "selected" : "" %>>Pending</option>
-                        <option value="Accepted" <%= rs.getString("status").equals("Accepted") ? "selected" : "" %>>Accepted</option>
-                        <option value="Rejected" <%= rs.getString("status").equals("Rejected") ? "selected" : "" %>>Rejected</option>
-                        <option value="On-Ride" <%= rs.getString("status").equals("On-Ride") ? "selected" : "" %>>On-Ride</option>
-                        <option value="Cancelled" <%= rs.getString("status").equals("Cancelled") ? "selected" : "" %>>Cancelled</option>
-                        <option value="Completed" <%= rs.getString("status").equals("Completed") ? "selected" : "" %>>Completed</option>
-                    </select>
-                </td>
+<%--                <td>--%>
+<%--                    <select name="status_<%= rs.getInt("id") %>" class="form-select">--%>
+<%--                        <option value="Pending" <%= rs.getString("status").equals("Pending") ? "selected" : "" %>>Pending</option>--%>
+<%--                        <option value="Accepted" <%= rs.getString("status").equals("Accepted") ? "selected" : "" %>>Accepted</option>--%>
+<%--                        <option value="Rejected" <%= rs.getString("status").equals("Rejected") ? "selected" : "" %>>Rejected</option>--%>
+<%--                        <option value="On-Ride" <%= rs.getString("status").equals("On-Ride") ? "selected" : "" %>>On-Ride</option>--%>
+<%--                        <option value="Cancelled" <%= rs.getString("status").equals("Cancelled") ? "selected" : "" %>>Cancelled</option>--%>
+<%--                        <option value="Completed" <%= rs.getString("status").equals("Completed") ? "selected" : "" %>>Completed</option>--%>
+<%--                    </select>--%>
+<%--                </td>--%>
             </tr>
             <%
                     }
@@ -153,7 +237,7 @@
             </tbody>
         </table>
         <button type="submit" name="delete" class="btn btn-danger">Delete Selected</button>
-        <button type="submit" name="update" class="btn btn-primary">Update Status</button>
+<%--        <button type="submit" name="update" class="btn btn-primary">Update Status</button>--%>
     </form>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

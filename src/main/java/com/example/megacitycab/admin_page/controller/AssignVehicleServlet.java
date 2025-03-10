@@ -9,7 +9,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-@WebServlet("/AssignVehicleServlet")
+@WebServlet("/Admin/AssignVehicleServlet")
 public class AssignVehicleServlet extends HttpServlet {
 
     @Override

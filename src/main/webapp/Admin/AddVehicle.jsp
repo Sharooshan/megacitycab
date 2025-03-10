@@ -14,7 +14,7 @@
     }
 
     .container {
-      max-width: 600px;
+      max-width: 1200px;
       margin-top: 50px;
       background-color: #ffffff;
       padding: 30px;
@@ -23,7 +23,7 @@
     }
 
     h2 {
-      color: #007bff;
+      color: #0b0d10;
       text-align: center;
       margin-bottom: 30px;
     }
@@ -50,36 +50,125 @@
     }
   </style>
 </head>
+<style>
+  body {
+    background-color: #f8f9fa;
+  }
+  .container {
+    max-width: 1200px;
+    margin-top: 50px;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  .vehicle-card {
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  .vehicle-img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+  body {
+    background-color: #ffffff;
+    color: #000000;
+    font-family: Arial, sans-serif;
+  }
+  .sidebar {
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: #000000;
+    color: #ffffff;
+    padding-top: 20px;
+  }
+  .sidebar a {
+    display: block;
+    color: #ffffff;
+    padding: 15px;
+    text-decoration: none;
+    transition: 0.3s;
+  }
+  .sidebar a:hover {
+    background-color: #555;
+  }
+  .content {
+    margin-left: 260px;
+    padding: 20px;
+  }
+  .card {
+    border: none;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  .btn-dark {
+    background-color: #212529; /* Dark color */
+    border-color: #212529;
+    color: #fff;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+  }
+
+  .btn-dark:hover {
+    background-color: #343a40; /* Slightly lighter dark shade */
+    border-color: #343a40;
+  }
+
+</style>
+<!-- Sidebar Navigation -->
+<div class="sidebar">
+  <h4 class="text-center">MegaCityCab - Admin</h4>
+  <a href="AdminDashboard.jsp">Dashboard</a>
+  <a href="assigning.jsp" >Assigning Drivers</a>
+  <a href="register.jsp" >Register Drivers</a>
+  <a href="admin_register.jsp">Register Admins</a>
+  <a href="viewRejections.jsp">Check Ride Rejections</a>
+  <a href="vehicleList.jsp">Manage Vehicles</a>
+  <a href="manageBookings.jsp">Manage Bookings</a>
+  <a href="driver_available_check.jsp">Driver Availability</a>
+  <a href="manage_feedback.jsp">Manage Feedback</a>
+  <a href="AddVehicle.jsp">Manage Vehicles</a>
+
+  <a href="AdminLogoutServlet">Logout</a>
+</div>
+
+
+
 <body>
 
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">MegaCityCab - Admin</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-          <a class="nav-link active" href="AdminDashboard.jsp">Dashboard</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="AddVehicle.jsp">Manage Vehicles</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="ManageAdmins.jsp">Manage Admins</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="ManageDrivers.jsp">Manage Drivers</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="AdminLogoutServlet">Logout</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
+<%--<!-- Navbar -->--%>
+<%--<nav class="navbar navbar-expand-lg navbar-light bg-light">--%>
+<%--  <div class="container-fluid">--%>
+<%--    <a class="navbar-brand" href="#">MegaCityCab - Admin</a>--%>
+<%--    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">--%>
+<%--      <span class="navbar-toggler-icon"></span>--%>
+<%--    </button>--%>
+<%--    <div class="collapse navbar-collapse" id="navbarNav">--%>
+<%--      <ul class="navbar-nav ms-auto">--%>
+<%--        <li class="nav-item">--%>
+<%--          <a class="nav-link active" href="AdminDashboard.jsp">Dashboard</a>--%>
+<%--        </li>--%>
+<%--        <li class="nav-item">--%>
+<%--          <a class="nav-link" href="AddVehicle.jsp">Manage Vehicles</a>--%>
+<%--        </li>--%>
+<%--        <li class="nav-item">--%>
+<%--          <a class="nav-link" href="ManageAdmins.jsp">Manage Admins</a>--%>
+<%--        </li>--%>
+<%--        <li class="nav-item">--%>
+<%--          <a class="nav-link" href="ManageDrivers.jsp">Manage Drivers</a>--%>
+<%--        </li>--%>
+<%--        <li class="nav-item">--%>
+<%--          <a class="nav-link" href="AdminLogoutServlet">Logout</a>--%>
+<%--        </li>--%>
+<%--      </ul>--%>
+<%--    </div>--%>
+<%--  </div>--%>
+<%--</nav>--%>
 
 <div class="container">
   <h2>Add New Vehicle</h2>
@@ -131,7 +220,7 @@
       <input type="file" name="image" id="image" class="form-control" required>
     </div>
 
-    <button type="submit" class="btn btn-primary">Add Vehicle</button>
+    <button type="submit" class="btn btn-dark">Add Vehicle</button>
   </form>
 </div>
 

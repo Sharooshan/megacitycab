@@ -13,7 +13,7 @@ import jakarta.servlet.http.Part;
 import java.io.IOException;
 import java.io.InputStream;
 
-@WebServlet("/DriverServlet")
+@WebServlet("/Admin/DriverServlet")
 @MultipartConfig(maxFileSize = 1024 * 1024 * 10)  // 10MB max file size
 public class DriverServlet extends HttpServlet {
 

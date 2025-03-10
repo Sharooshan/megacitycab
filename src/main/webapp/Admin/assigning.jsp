@@ -14,7 +14,7 @@
             background-color: #f8f9fa;
         }
         .container {
-            max-width: 900px;
+            max-width: 1200px;
             margin-top: 50px;
             background-color: #ffffff;
             padding: 30px;
@@ -33,9 +33,72 @@
             height: auto;
             border-radius: 10px;
         }
+        body {
+            background-color: #ffffff;
+            color: #000000;
+            font-family: Arial, sans-serif;
+        }
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            background-color: #000000;
+            color: #ffffff;
+            padding-top: 20px;
+        }
+        .sidebar a {
+            display: block;
+            color: #ffffff;
+            padding: 15px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .sidebar a:hover {
+            background-color: #555;
+        }
+        .content {
+            margin-left: 260px;
+            padding: 20px;
+        }
+        .card {
+            border: none;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .btn-dark {
+            background-color: #212529; /* Dark color */
+            border-color: #212529;
+            color: #fff;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .btn-dark:hover {
+            background-color: #343a40; /* Slightly lighter dark shade */
+            border-color: #343a40;
+        }
+
     </style>
 </head>
 <body>
+
+<!-- Sidebar Navigation -->
+<div class="sidebar">
+    <h4 class="text-center">MegaCityCab - Admin</h4>
+    <a href="AdminDashboard.jsp">Dashboard</a>
+    <a href="assigning.jsp" >Assigning Drivers</a>
+    <a href="register.jsp" >Register Drivers</a>
+    <a href="admin_register.jsp">Register Admins</a>
+    <a href="viewRejections.jsp">Check Ride Rejections</a>
+    <a href="vehicleList.jsp">Manage Vehicles</a>
+    <a href="manageBookings.jsp">Manage Bookings</a>
+    <a href="driver_available_check.jsp">Driver Availability</a>
+    <a href="manage_feedback.jsp">Manage Feedback</a>
+    <a href="AddVehicle.jsp">Manage Vehicles</a>
+
+    <a href="AdminLogoutServlet">Logout</a>
+</div>
+
 
 <div class="container">
     <h1>Vehicle Details</h1>
@@ -118,10 +181,10 @@
                     driverPs.close();
                 %>
             </select>
-            <button type="submit" class="btn btn-primary mt-3">Assign Vehicle</button>
+            <button type="submit" class="btn btn-dark mt-3">Assign Vehicle</button>
         </form>
         <!-- Button to Check Driver Availability -->
-        <a href="driver_available_check.jsp?vehicle_id=<%= vehicleId %>" class="btn btn-info mt-3">Check Driver Availability</a>
+        <a href="driver_available_check.jsp?vehicle_id=<%= vehicleId %>" class="btn btn-dark mt-3">Check Driver Availability</a>
     </div>
 
     <%
@@ -187,11 +250,11 @@
                     driverPs.close();
                 %>
             </select>
-            <button type="submit" class="btn btn-primary mt-3">Assign Vehicle</button>
+            <button type="submit" class="btn btn-dark mt-3">Assign Vehicle</button>
 
         </form>
         <!-- Button to Check Driver Availability -->
-        <a href="driver_available_check.jsp?vehicle_id=<%= vehicleId %>" class="btn btn-info mt-3">Check Driver Availability</a>
+        <a href="driver_available_check.jsp?vehicle_id=<%= vehicleId %>" class="btn btn-dark mt-3">Check Driver Availability</a>
     </div>
 
     <%

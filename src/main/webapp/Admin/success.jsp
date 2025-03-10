@@ -6,6 +6,6 @@
 </head>
 <body>
 <h2>Registration Successful!</h2>
-<p><a href="customers/login.jsp">Go to Login</a></p>
+<p><a href="../customers/login.jsp">Go to Login</a></p>
 </body>
 </html>

@@ -20,6 +20,6 @@
 <p class="error-message">
     <%= request.getAttribute("errorMessage") != null ? request.getAttribute("errorMessage") : "An unexpected error occurred. Please try again later." %>
 </p>
-<a href="customers/index.jsp">Go Back to Home</a>
+<a href="../customers/index.jsp">Go Back to Home</a>
 </body>
 </html>
