@@ -82,7 +82,10 @@
                     <a href="edit_profile.jsp?driver_id=<%= driver.getId() %>" class="list-group-item list-group-item-action">Edit Profile</a>
                     <a href="view_rides.jsp?driver_id=<%= driver.getId() %>" class="list-group-item list-group-item-action">View My Rides</a>
 
-                    <a href="logout" class="list-group-item list-group-item-action text-danger">Logout</a>
+                    <a href="/megacitycab_war_exploded/LogoutServlet" class="list-group-item list-group-item-action text-danger">Logout</a>
+
+
+
                 </div>
             </div>
         </div>

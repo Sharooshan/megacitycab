@@ -51,7 +51,7 @@ public class DriverLoginServlet extends HttpServlet {
         } else {
             // Invalid login credentials, show error message and forward back to login page
             request.setAttribute("errorMessage", "Invalid username or password!");
-            request.getRequestDispatcher("/jsp/driver_login.jsp").forward(request, response);
+            request.getRequestDispatcher("/driver/driver_login.jsp").forward(request, response);
         }
     }
 }

@@ -9,41 +9,205 @@
     <title>Add Feedback</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+
+
+
+        .navbar {
+            background-color: #1E1E1E !important;
+            padding: 15px 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* Brand (Always Left-Aligned) */
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #FFCC00 !important;
+        }
+
+        /* Navbar Links */
+        .navbar-nav {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-grow: 1; /* Pushes buttons to the center */
+        }
+
+        .navbar-nav .nav-link {
+            color: #FFFFFF !important;
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin: 0 10px;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #FFCC00 !important;
+        }
+
+        /* Navbar - Logged In */
+        .navbar-logged-in {
+            background-color: #FFCC00 !important;
+        }
+
+        .navbar-logged-in .navbar-brand {
+            color: #1E1E1E !important;
+        }
+
+        .navbar-logged-in .nav-link {
+            color: #1E1E1E !important;
+        }
+
+        /* Center Navbar Buttons After Login */
+        .navbar-logged-in .navbar-nav {
+            justify-content: center;
+            width: 100%;
+        }
+
+        /* Login Button (Visible Only Before Login) */
+        .navbar .login-btn {
+            display: block;
+        }
+
+        /* Hide Login Button After Login */
+        .navbar-logged-in .login-btn {
+            display: none;
+        }
+
+        /* Buttons */
+        .navbar .btn {
+            background-color: #FFCC00;
+            color: #1E1E1E;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            margin: 0 10px;
+        }
+
+        .navbar .btn:hover {
+            background-color: #D9B000;
+            color: #FFFFFF;
+        }
+
+        /* Feedback Section */
         .feedback-container {
-            max-width: 600px;
+            max-width: 1650px; /* Expanded width for a larger container */
             margin: auto;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            background: #f9f9f9;
+            padding: 25px; /* Increased padding for a more spacious design */
+            border: 3px solid #FFCC00; /* Yellow border */
+            border-radius: 12px; /* Rounded corners for a modern look */
+            background: #FFFFFF; /* Dark Gray background for high contrast */
+            color: black; /* White text for readability */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+            font-size: 1rem; /* Slightly larger text for better readability */
         }
+
+        .feedback-container h3 {
+            color: #FFCC00; /* Yellow for headings to keep consistent theme */
+            margin-bottom: 15px;
+        }
+
+        .feedback-container p {
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+
         .btn-custom {
-            background-color: #4CAF50;
-            color: white;
+            background-color: #FFCC00;
+            color: #1E1E1E;
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-weight: bold;
         }
+
+
         .btn-custom:hover {
-            background-color: #45a049;
+            background-color: #D9B000;
+            color: #FFFFFF;
         }
+
+        /* Feedback Cards */
         .feedback-card {
             background: #fff;
-            padding: 15px;
-            border: 1px solid #ddd;
-            margin-bottom: 10px;
-            border-radius: 8px;
+            padding: 20px; /* Increased padding for expanded card */
+            border: 3px solid #FFCC00; /* Yellow border */
+            margin-bottom: 20px; /* Increased margin for spacing */
+            border-radius: 12px; /* Slightly larger border radius for smoother edges */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Added subtle shadow for a lifted effect */
         }
+
+
         .feedback-card .rating {
             font-size: 1.2em;
             color: gold;
         }
+
+        /* Reply Section */
         .reply-section {
             margin-top: 10px;
             padding: 10px;
             border-left: 2px solid #ccc;
             background: #f9f9f9;
         }
+
+        /* Moving Text Banner */
+        .moving-text-banner {
+            background-color: #FFCC00;
+            color: #1E1E1E;
+            padding: 10px;
+            font-size: 1.2rem;
+            text-align: center;
+            animation: scrollText 20s linear infinite;
+        }
+
+        /* Scrolling Text Animation */
+        @keyframes scrollText {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
     </style>
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <!-- Brand Logo -->
+        <a class="navbar-brand" href="index.jsp">Mega City Cab</a>
+
+        <!-- Navbar Toggler (Mobile) -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar Links -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" href="index.jsp">Home</a>
+                </li>
+                <%--                <li class="nav-item">--%>
+                <%--                    <a class="nav-link" href="../customers/register.jsp">Register</a>--%>
+                <%--                </li>--%>
+            </ul>
+
+            <!-- Right Aligned Links (Login/Logout + Other Buttons) -->
+            <div class="d-flex align-items-center">
+                <% String customerEmail = (String) session.getAttribute("customerEmail"); %>
+<%--                <% Integer customerId = (Integer) session.getAttribute("customerId"); %>--%>
+
+                <% if (customerEmail != null) { %>
+                <a class="btn btn-outline-light me-2" href="bookingStatus.jsp">Booking Status</a>
+                <a class="btn btn-outline-light me-2" href="Add_feedback.jsp">Add Feedback</a>
+                <a class="btn btn-warning text-dark px-3" href="logout">Logout</a>
+                <% } else { %>
+                <a class="btn btn-warning text-dark px-3" href="login.jsp">Login</a>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</nav>
 <div class="container my-5">
     <div class="feedback-container">
         <h3 class="text-center">Submit Your Feedback</h3>
@@ -154,7 +318,7 @@
                     int rating = rs.getInt("rating");
                     String createdAt = rs.getString("created_at");
                     String customerName = rs.getString("customer_name");
-                    String customerEmail = rs.getString("customer_email");
+                    customerEmail = rs.getString("customer_email");
                     String customerPhone = rs.getString("customer_phone");
                     String driverUsername = rs.getString("driver_username");
                     String driverEmail = rs.getString("driver_email");
@@ -205,7 +369,7 @@
     </div>
 
     <div class="text-center mt-4">
-        <a href="index.jsp" class="btn btn-outline-primary">Go to Home</a>
+        <a href="index.jsp" class="btn btn-custom">Go to Home</a>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

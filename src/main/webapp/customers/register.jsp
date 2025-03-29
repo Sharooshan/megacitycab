@@ -9,31 +9,40 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            background: linear-gradient(135deg, #f8f9fa, #f8f9fa);
+            background: #f4f4f4;
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
+            font-family: 'Arial', sans-serif;
         }
         .login-container {
             max-width: 400px;
-            background: #ffffff;
+            background: #333333;
+            color: #ffffff;
             padding: 30px;
             border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
             text-align: center;
         }
         h2 {
             font-weight: 700;
-            color: #333;
+            color: #ffcc00;
         }
         .form-control {
             border-radius: 8px;
-            border: 1px solid #ced4da;
+            border: 1px solid #555555;
+
+            color: #fff;
             box-shadow: none;
         }
+        .form-control:focus {
+            border-color: #ffcc00;
+            box-shadow: 0 0 5px rgba(255, 204, 0, 0.5);
+        }
         .btn-primary {
-            background: #007bff;
+            background: #ffcc00;
+            color: #333333;
             border: none;
             border-radius: 8px;
             font-size: 16px;
@@ -41,10 +50,10 @@
             transition: 0.3s;
         }
         .btn-primary:hover {
-            background: #0056b3;
+            background: #e6b800;
         }
         .text-center a {
-            color: #007bff;
+            color: #ffcc00;
             font-weight: 600;
         }
         .text-center a:hover {
@@ -52,6 +61,11 @@
         }
         .error {
             color: red;
+            font-size: 14px;
+        }
+        .alert-danger {
+            background: #e60000;
+            color: #fff;
             font-size: 14px;
         }
     </style>

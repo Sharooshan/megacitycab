@@ -9,6 +9,10 @@
     <title>Booking Confirmation</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        body {
+            background-color: #ffffff; /* White background */
+            font-family: Arial, sans-serif;
+        }
         .bill-container {
             max-width: 600px;
             margin: auto;
@@ -16,27 +20,44 @@
             border: 1px solid #ddd;
             border-radius: 10px;
             background: #f9f9f9;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         .bill-header {
             text-align: center;
             font-size: 1.5rem;
             font-weight: bold;
             margin-bottom: 20px;
+            color: #FFCC00; /* Yellow for header */
         }
         .bill-details {
             font-size: 1rem;
+            color: #1E1E1E; /* Dark Gray text */
         }
         .bill-total {
             font-size: 1.2rem;
             font-weight: bold;
             text-align: right;
+            color: #1E1E1E; /* Dark Gray for total price */
         }
         .btn-custom {
-            background-color: #4CAF50;
-            color: white;
+            background-color: #FFCC00;
+            color: #1E1E1E;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 8px;
         }
         .btn-custom:hover {
-            background-color: #45a049;
+            background-color: #D9B000;
+            color: #FFFFFF;
+        }
+        .btn-outline-primary {
+            border-color: #FFCC00;
+            color: #FFCC00;
+            font-weight: bold;
+        }
+        .btn-outline-primary:hover {
+            background-color: #FFCC00;
+            color: #1E1E1E;
         }
     </style>
 </head>
@@ -113,7 +134,6 @@
         </div>
     </div>
     <div class="text-center mt-4">
-<%--        <a href="index.jsp" class="btn btn-custom">Go to Home</a>--%>
         <a href="bookingHistory.jsp" class="btn btn-outline-primary ms-2">View Booking History</a>
     </div>
 </div>

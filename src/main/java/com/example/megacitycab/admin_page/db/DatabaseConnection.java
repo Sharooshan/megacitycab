@@ -1,7 +1,4 @@
 package com.example.megacitycab.admin_page.db;
-
-
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;

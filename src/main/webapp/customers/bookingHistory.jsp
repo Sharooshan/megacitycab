@@ -20,6 +20,13 @@
         .btn-custom:hover {
             background-color: #45a049;
         }
+        .btn-custom {
+            background-color: #FFCC00;
+            color: #1E1E1E;
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
